@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
-import Auth from './pages/auth/Aurh';
+import Auth from './pages/auth/Auth';
 import TodosPage from './pages/todos/TodosPage';
 import UpdateTodo from './pages/update-todo/UpdateTodo';
 import UserInfo from './pages/user-info/UserInfo';
