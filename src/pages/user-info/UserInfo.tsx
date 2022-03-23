@@ -1,11 +1,11 @@
 import React from 'react';
 
-function TodoCreate() {
+function UserInfo() {
   return (
     <div>
-
+      User Info
     </div>
   );
 }
 
-export default TodoCreate;
+export default UserInfo;
