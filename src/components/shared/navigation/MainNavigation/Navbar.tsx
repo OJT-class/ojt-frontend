@@ -1,8 +1,11 @@
 import React from 'react'
+import * as S from './styles';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   return (
-    <div>Navbar</div>
+    <S.Nav>
+        <S.NavBarTitle>ToDos Board Customized Title</S.NavBarTitle>
+    </S.Nav>
   )
 }
 
