@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 import "antd/dist/antd.css";
 import { Avatar, Image, Dropdown, Menu } from 'antd';
@@ -12,7 +13,7 @@ const widgetMenu = (
   <Menu>
     <Menu.Item>
       <SolutionOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
-      profile
+      <Link to="user-info/:id">profile</Link>
     </Menu.Item>
     <Menu.Item>
       <PoweroffOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
