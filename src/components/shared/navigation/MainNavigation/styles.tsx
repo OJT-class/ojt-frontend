@@ -21,23 +21,3 @@ export const Nav = styled.nav`
 export const NavBarTitle = styled.div`
   padding-left: 1rem;
 `;
-
-export const MenuIcon = styled.div`
-  padding: 1rem;
-`;
-
-export const Avatar = styled.div`
-  box-sizing: border-box;
-  border-radius: 50%;
-  border: 1px solid grey;
-  padding: 1rem;
-  width: 3rem;
-  height: 3rem;
-  background-color: grey;
-  overflow: hidden;
-  text-align: center;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
