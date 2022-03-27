@@ -28,8 +28,17 @@ export const Container = styled.div`
 export const Title = styled.div`
   font-weight: bold;
   font-size: 2rem;
-  text-decoration: underline double;
+  /* text-decoration: underline double; */
   margin-bottom: 2rem;
+  
+
+  &:after {
+      content:' ';
+    display:block;
+    height: 0.3rem;
+    width: 100%;
+    background: #08f7fe;
+  }
 `;
 
 export const Row = styled.div`

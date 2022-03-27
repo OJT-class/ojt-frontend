@@ -34,7 +34,9 @@ const Auth = () => {
 
   return (
     <S.Container>
-      <S.Title>Login Required</S.Title>
+      <S.Title>Login Required
+        <div className='line'></div>
+      </S.Title>
       <Form
       // {...formItemLayout}
       // layout={formLayout}
