@@ -1,6 +1,7 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React, {useContext} from 'react'
+import { Link, useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../../../../context/auth/Auth-context";
 import "antd/dist/antd.css";
 import { Avatar, Image, Dropdown, Menu } from 'antd';
 import { UserOutlined, SolutionOutlined, LockOutlined, PoweroffOutlined } from '@ant-design/icons';
@@ -8,6 +9,13 @@ import { UserOutlined, SolutionOutlined, LockOutlined, PoweroffOutlined } from '
 import * as S from './styles';
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate()
+  const auth = useContext(AuthContext);
+
+  const handelLogOut = () => {
+    auth.logout()
+    navigate('/auth')
+  }
 
 const widgetMenu = (
   <Menu>
@@ -15,7 +23,7 @@ const widgetMenu = (
       <SolutionOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
       <Link to="user-info/:id">profile</Link>
     </Menu.Item>
-    <Menu.Item>
+    <Menu.Item onClick={handelLogOut}>
       <PoweroffOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
       sign out
     </Menu.Item>
