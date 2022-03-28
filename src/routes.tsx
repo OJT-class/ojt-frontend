@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 
+// import RequireAuth from './components/RequireAuth';
 import {useAuth} from './hooks/auth-hook'
 
 import Auth from './pages/auth/Auth';
@@ -9,15 +10,15 @@ import UserInfo from './pages/user-info/UserInfo';
 
 const AppRoutes: React.FC = () => {
   const { token } = useAuth();
-  console.log("🚀 ~ file: routes.tsx ~ line 12 ~ token", token)
 
    return (
      <Routes>
        <Route path="/auth" element={<Auth />} />
        <Route path="/" element={token ? <TodosPage /> : <Navigate to="/auth"/>} />
+       {/* <Route path="/" element={<RequireAuth><TodosPage/></RequireAuth>} /> */}
        <Route path="/:todoid/update" element={<UpdateTodo />} />
-       {/* <Route path="/user-info/:id" element={<UserInfo />} /> */}
        <Route path="/user-info/:id" element={token ? <UserInfo /> : <Navigate to="/auth"/>} />
+       {/* <Route path="/user-info/:id" element={<RequireAuth><UserInfo/></RequireAuth>} /> */}
      </Routes>
    );
 }

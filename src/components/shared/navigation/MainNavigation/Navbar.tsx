@@ -23,6 +23,10 @@ const widgetMenu = (
       <SolutionOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
       <Link to="user-info/:id">profile</Link>
     </Menu.Item>
+    <Menu.Item>
+      <SolutionOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
+      <Link to="/">Todos</Link>
+    </Menu.Item>
     <Menu.Item onClick={handelLogOut}>
       <PoweroffOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
       sign out

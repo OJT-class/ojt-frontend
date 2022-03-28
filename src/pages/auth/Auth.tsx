@@ -12,15 +12,6 @@ import {
 
 import * as S from './styles';
 
-// interface AuthContextInterface {
-//   isLoggedIn: boolean
-//   name: string;
-//   userId: string | null;
-//   token: string | null | boolean;
-//   login: any;
-//   logout: any
-// }
-
 const Auth: React.FC = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
@@ -46,8 +37,7 @@ const Auth: React.FC = () => {
         const responseData = await fetch('http://localhost:8080/auth/login', config);
         const data = await responseData.json();
         console.log("🚀 ~ file: Auth.tsx ~ line 54 ~ authSubmitHandler ~ data", data)
-        // return data;
-        // login()
+        // login:
         auth.login(data.user._id, data.token, data.username);
         
         navigate('/')
@@ -59,9 +49,7 @@ const Auth: React.FC = () => {
       try {
         const responseData = await fetch('http://localhost:8080/auth/register', config);
         const data = await responseData.json();
-        // console.log("🚀 ~ file: Auth.tsx ~ line 65 ~ authSubmitHandler ~ responseData", responseData)
-        // console.log("🚀 ~ file: Auth.tsx ~ line 65 ~ authSubmitHandler ~ values-r", values)
-        //register
+        //register:
         auth.login(data.user._id, data.token, data.username);
         navigate('/');
       } catch (error) {
@@ -123,12 +111,8 @@ const Auth: React.FC = () => {
         <div className='line'></div>
       </S.Title>
       <Form
-      // {...formItemLayout}
-      // layout={formLayout}
       layout="vertical"
       form={form}
-      // labelCol={{ span: 8 }}
-      // wrapperCol={{ span: 16 }}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
