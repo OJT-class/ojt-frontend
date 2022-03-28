@@ -1,7 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import {useAuth} from './hooks/auth-hook'
-import {AuthContext} from './context/auth/Auth-context'
 
 import Auth from './pages/auth/Auth';
 import TodosPage from './pages/todos/TodosPage';
@@ -9,14 +8,16 @@ import UpdateTodo from './pages/update-todo/UpdateTodo';
 import UserInfo from './pages/user-info/UserInfo';
 
 const AppRoutes: React.FC = () => {
-  const { token, login, logout, userId, name } = useAuth();
+  const { token } = useAuth();
+  console.log("🚀 ~ file: routes.tsx ~ line 12 ~ token", token)
 
    return (
      <Routes>
-       <Route path="/" element={token ? <TodosPage /> : <Auth/>} />
        <Route path="/auth" element={<Auth />} />
+       <Route path="/" element={token ? <TodosPage /> : <Navigate to="/auth"/>} />
        <Route path="/:todoid/update" element={<UpdateTodo />} />
-       <Route path="/user-info/:id" element={<UserInfo />} />
+       {/* <Route path="/user-info/:id" element={<UserInfo />} /> */}
+       <Route path="/user-info/:id" element={token ? <UserInfo /> : <Navigate to="/auth"/>} />
      </Routes>
    );
 }
