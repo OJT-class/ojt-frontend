@@ -17,7 +17,7 @@ const App: React.FC = () => {
         value={{
           isLoggedIn: !!token,
           token: token,
-          // name: name,
+          name: name,
           login: login,
           logout: logout,
           userId: userId,
