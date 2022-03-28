@@ -1,8 +1,9 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext} from 'react';
+import { useNavigate } from "react-router-dom";
 
 import {AuthContext} from '../../context/auth/Auth-context'
 
-import { Form, Input, Button, Checkbox, Space } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 import {
   LoginOutlined,
   UserOutlined, 
@@ -11,17 +12,62 @@ import {
 
 import * as S from './styles';
 
-type LayoutType = Parameters<typeof Form>[0]['layout'];
+// interface AuthContextInterface {
+//   isLoggedIn: boolean
+//   name: string;
+//   userId: string | null;
+//   token: string | null | boolean;
+//   login: any;
+//   logout: any
+// }
 
-const Auth = () => {
+const Auth: React.FC = () => {
+  const navigate = useNavigate();
   const auth = useContext(AuthContext);
-  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
 
   const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState<LayoutType>('horizontal');
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Success:', values);
+    // authSubmitHandler()
+    const config = {
+      method: 'POST',
+      headers: {
+                  'Content-Type': 'application/json'
+               },
+        body: JSON.stringify(values)
+    }
+
+    if (isLoginMode) {
+      // POST | login
+      // const url = process.env.REACT_APP_BACKEND_URL
+      try {
+        const responseData = await fetch('http://localhost:8080/auth/login', config);
+        const data = await responseData.json();
+        console.log("🚀 ~ file: Auth.tsx ~ line 54 ~ authSubmitHandler ~ data", data)
+        // return data;
+        // login()
+        auth.login(data.user._id, data.token, data.username);
+        
+        navigate('/')
+      } catch (error) {
+      console.log("🚀 ~ file: Auth.tsx ~ line 47 ~ onFinish ~ error", error)
+      }
+    } else {
+      // POST | register
+      try {
+        const responseData = await fetch('http://localhost:8080/auth/register', config);
+        const data = await responseData.json();
+        // console.log("🚀 ~ file: Auth.tsx ~ line 65 ~ authSubmitHandler ~ responseData", responseData)
+        // console.log("🚀 ~ file: Auth.tsx ~ line 65 ~ authSubmitHandler ~ values-r", values)
+        //register
+        auth.login(data.user._id, data.token, data.username);
+        navigate('/');
+      } catch (error) {
+      console.log("🚀 ~ file: Auth.tsx ~ line 56 ~ onFinish ~ error", error)
+      }
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -31,6 +77,45 @@ const Auth = () => {
   const switchModeHandler = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
+
+  //Change any to User!! 
+  const authSubmitHandler = async (event: React.FormEvent, data: any) => {
+    event.preventDefault();
+
+    const config = {
+      method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    }
+
+    if (isLoginMode) {
+      // POST | login
+      // const url = process.env.REACT_APP_BACKEND_URL
+      try {
+        const responseData = await fetch('http://localhost:8080/auth/login', config);
+        console.log("🚀 ~ file: Auth.tsx ~ line 51 ~ authSubmitHandler ~ responseData", responseData)
+        const data = await responseData.json();
+        console.log("🚀 ~ file: Auth.tsx ~ line 54 ~ authSubmitHandler ~ data", data)
+        // return data;
+        // login()
+        // history.push('/');
+      } catch (error) {
+        
+      }
+    } else {
+      // POST | register
+      try {
+        const responseData = await fetch('http://localhost:8080/auth/register', config);
+        console.log("🚀 ~ file: Auth.tsx ~ line 65 ~ authSubmitHandler ~ responseData", responseData)
+      } catch (error) {
+        
+      }
+    }
+
+  }
 
   return (
     <S.Container>
