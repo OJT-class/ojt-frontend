@@ -8,7 +8,7 @@ import { UserOutlined, SolutionOutlined, LockOutlined, PoweroffOutlined } from '
 
 import * as S from './styles';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const navigate = useNavigate()
   const auth = useContext(AuthContext);
 

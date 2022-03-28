@@ -12,7 +12,13 @@ import {
 
 import * as S from './styles';
 
-const Auth: React.FC = () => {
+interface User {
+  uid: string, 
+  token: string | null, 
+  userName: string
+}
+
+const Auth = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
@@ -34,7 +40,12 @@ const Auth: React.FC = () => {
       // POST | login
       // const url = process.env.REACT_APP_BACKEND_URL
       try {
+        // const responseData = await fetch('http://localhost:8080/auth/login', config);
         const responseData = await fetch('http://localhost:8080/auth/login', config);
+        if (!responseData.ok) {
+          const message = `An error has occured: ${responseData.status}`;
+          throw new Error(message);
+        }
         const data = await responseData.json();
         console.log("🚀 ~ file: Auth.tsx ~ line 54 ~ authSubmitHandler ~ data", data)
         // login:

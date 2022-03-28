@@ -8,7 +8,7 @@ import TodosPage from './pages/todos/TodosPage';
 import UpdateTodo from './pages/update-todo/UpdateTodo';
 import UserInfo from './pages/user-info/UserInfo';
 
-const AppRoutes: React.FC = () => {
+const AppRoutes = () => {
   const { token } = useAuth();
 
    return (

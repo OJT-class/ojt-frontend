@@ -7,7 +7,7 @@ import AppRoutes from './routes';
 import Navbar from './components/shared/navigation/MainNavigation/Navbar';
 import {GlobalStyle} from './styles/globalStyle'
 
-const App: React.FC = () => {
+const App = () => {
   const { token, login, logout, userId, name } = useAuth();
 
   return (
