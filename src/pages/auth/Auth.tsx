@@ -35,13 +35,13 @@ const Auth = () => {
                },
         body: JSON.stringify(values)
     }
+    
+    const url: string | undefined = (process.env.REACT_APP_BACKEND_URL as string)
 
     if (isLoginMode) {
       // POST | login
-      // const url = process.env.REACT_APP_BACKEND_URL
       try {
-        // const responseData = await fetch('http://localhost:8080/auth/login', config);
-        const responseData = await fetch('http://localhost:8080/auth/login', config);
+        const responseData = await fetch(`${url}/auth/login`, config);
         if (!responseData.ok) {
           const message = `An error has occured: ${responseData.status}`;
           throw new Error(message);
@@ -58,7 +58,8 @@ const Auth = () => {
     } else {
       // POST | register
       try {
-        const responseData = await fetch('http://localhost:8080/auth/register', config);
+        // const responseData = await fetch('http://localhost:8080/auth/register', config);
+        const responseData = await fetch(`${url}/auth/register`, config);
         const data = await responseData.json();
         //register:
         auth.login(data.user._id, data.token, data.username);
@@ -118,7 +119,7 @@ const Auth = () => {
 
   return (
     <S.Container>
-      <S.Title>Login Required
+      <S.Title>{isLoginMode ? 'Login' : 'Registration'} Required 
         <div className='line'></div>
       </S.Title>
       <Form

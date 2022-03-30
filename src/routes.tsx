@@ -11,11 +11,13 @@ import UserInfo from './pages/user-info/UserInfo';
 const AppRoutes = () => {
   const { token } = useAuth();
 
+
+
    return (
      <Routes>
-       <Route path="/auth" element={<Auth />} />
        <Route path="/" element={token ? <TodosPage /> : <Navigate to="/auth"/>} />
        {/* <Route path="/" element={<RequireAuth><TodosPage/></RequireAuth>} /> */}
+       <Route path="/auth" element={<Auth />} />
        <Route path="/:todoid/update" element={<UpdateTodo />} />
        <Route path="/user-info/:id" element={token ? <UserInfo /> : <Navigate to="/auth"/>} />
        {/* <Route path="/user-info/:id" element={<RequireAuth><UserInfo/></RequireAuth>} /> */}

@@ -19,15 +19,15 @@ const Navbar = () => {
 
 const widgetMenu = (
   <Menu>
-    <Menu.Item>
+    <Menu.Item key={1}>
       <SolutionOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
       <Link to="user-info/:id">profile</Link>
     </Menu.Item>
-    <Menu.Item>
+    <Menu.Item key={2}>
       <SolutionOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
       <Link to="/">Todos</Link>
     </Menu.Item>
-    <Menu.Item onClick={handelLogOut}>
+    <Menu.Item key={3} onClick={handelLogOut}>
       <PoweroffOutlined style={{textAlign: 'center', paddingRight: '0.5rem'}} />
       sign out
     </Menu.Item>
