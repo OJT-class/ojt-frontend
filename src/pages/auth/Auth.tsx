@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import {useState, useContext} from 'react';
 import { useNavigate } from "react-router-dom";
 
 import {AuthContext} from '../../context/auth/Auth-context'
@@ -12,11 +12,11 @@ import {
 
 import * as S from './styles';
 
-interface User {
-  uid: string, 
-  token: string | null, 
-  userName: string
-}
+// interface User {
+//   uid: string, 
+//   token: string | null, 
+//   userName: string
+// }
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Auth = () => {
 
   const onFinish = async (values: any) => {
     console.log('Success:', values);
-    // authSubmitHandler()
+    // authSubmitHandler(event: React.FormEvent, data) ??
     const config = {
       method: 'POST',
       headers: {
@@ -47,8 +47,6 @@ const Auth = () => {
           throw new Error(message);
         }
         const data = await responseData.json();
-        console.log("🚀 ~ file: Auth.tsx ~ line 54 ~ authSubmitHandler ~ data", data)
-        // login:
         auth.login(data.user._id, data.token, data.username);
         
         navigate('/')
@@ -58,10 +56,8 @@ const Auth = () => {
     } else {
       // POST | register
       try {
-        // const responseData = await fetch('http://localhost:8080/auth/register', config);
         const responseData = await fetch(`${url}/auth/register`, config);
         const data = await responseData.json();
-        //register:
         auth.login(data.user._id, data.token, data.username);
         navigate('/');
       } catch (error) {
@@ -78,45 +74,7 @@ const Auth = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
 
-  //Change any to User!! 
-  const authSubmitHandler = async (event: React.FormEvent, data: any) => {
-    event.preventDefault();
-
-    const config = {
-      method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    }
-
-    if (isLoginMode) {
-      // POST | login
-      // const url = process.env.REACT_APP_BACKEND_URL
-      try {
-        const responseData = await fetch('http://localhost:8080/auth/login', config);
-        console.log("🚀 ~ file: Auth.tsx ~ line 51 ~ authSubmitHandler ~ responseData", responseData)
-        const data = await responseData.json();
-        console.log("🚀 ~ file: Auth.tsx ~ line 54 ~ authSubmitHandler ~ data", data)
-        // return data;
-        // login()
-        // history.push('/');
-      } catch (error) {
-        
-      }
-    } else {
-      // POST | register
-      try {
-        const responseData = await fetch('http://localhost:8080/auth/register', config);
-        console.log("🚀 ~ file: Auth.tsx ~ line 65 ~ authSubmitHandler ~ responseData", responseData)
-      } catch (error) {
-        
-      }
-    }
-
-  }
-
+ 
   return (
     <S.Container>
       <S.Title>{isLoginMode ? 'Login' : 'Registration'} Required 
