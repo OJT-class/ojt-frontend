@@ -16,13 +16,13 @@ const AppRoutes = () => {
    return (
      <Routes>
        {/* <Route path="/" element={token ? <TodosPage /> : <Navigate to="/auth"/>} /> */}
+       {/* <Route path="/" element={<RequireAuth><TodosPage/></RequireAuth>} /> */}
 
        {/* Public Routes: */}
        <Route path="/auth" element={<Auth />} />
 
-       <Route element={<RequireAuth/>}>
        {/* Protected Routes: */}
-       {/* <Route path="/" element={<RequireAuth><TodosPage/></RequireAuth>} /> */}
+       <Route element={<RequireAuth/>}>
          <Route path='/' element={<TodosPage/>}/>
        <Route path="/:todoid/update" element={<UpdateTodo />} />
        <Route path="user-info/:id" element={<UserInfo /> } />
