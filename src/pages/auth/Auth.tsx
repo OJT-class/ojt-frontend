@@ -1,5 +1,5 @@
 import {useState, useContext} from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 import {AuthContext} from '../../context/auth/Auth-context'
 
@@ -20,6 +20,9 @@ import * as S from './styles';
 
 const Auth = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  // const from = location.state?.from?.pathname || '/';
+
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
 
@@ -49,7 +52,7 @@ const Auth = () => {
         const data = await responseData.json();
         auth.login(data.user._id, data.token, data.username);
         
-        navigate('/')
+        navigate('/', {replace: true})
       } catch (error) {
       console.log("🚀 ~ file: Auth.tsx ~ line 47 ~ onFinish ~ error", error)
       }

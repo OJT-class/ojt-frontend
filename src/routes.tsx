@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-// import RequireAuth from './components/RequireAuth';
+import RequireAuth from './components/RequireAuth';
 import {useAuth} from './hooks/auth-hook'
 
 import Auth from './pages/auth/Auth';
@@ -15,12 +15,18 @@ const AppRoutes = () => {
 
    return (
      <Routes>
-       <Route path="/" element={token ? <TodosPage /> : <Navigate to="/auth"/>} />
-       {/* <Route path="/" element={<RequireAuth><TodosPage/></RequireAuth>} /> */}
+       {/* <Route path="/" element={token ? <TodosPage /> : <Navigate to="/auth"/>} /> */}
+
+       {/* Public Routes: */}
        <Route path="/auth" element={<Auth />} />
+
+       <Route element={<RequireAuth/>}>
+       {/* Protected Routes: */}
+       {/* <Route path="/" element={<RequireAuth><TodosPage/></RequireAuth>} /> */}
+         <Route path='/' element={<TodosPage/>}/>
        <Route path="/:todoid/update" element={<UpdateTodo />} />
-       <Route path="/user-info/:id" element={token ? <UserInfo /> : <Navigate to="/auth"/>} />
-       {/* <Route path="/user-info/:id" element={<RequireAuth><UserInfo/></RequireAuth>} /> */}
+       <Route path="user-info/:id" element={<UserInfo /> } />
+       </Route>
      </Routes>
    );
 }
